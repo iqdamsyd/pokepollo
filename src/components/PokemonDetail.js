@@ -10,7 +10,7 @@ import usePokemon from "../hooks/usePokemon";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #b3a125;
+  background-color: #8ebc8d;
 `;
 
 const TextWrapper = styled(Wrapper)`

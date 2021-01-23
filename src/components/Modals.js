@@ -167,7 +167,7 @@ const ModalCatchingSuccess = ({
                   Primary
                   disabled={nickname === "" ? true : false}
                 >
-                  Ok
+                  Save
                 </Button>
               </Form>
             </>
@@ -228,12 +228,12 @@ const ModalCatching = ({ prob, pokemon }) => {
 
 const ModalRelease = ({ showModalRelease, setShowModalRelease }) => {
   const { releasePokemon } = useUser();
-  const { getCurrentPokemon, getLastPageVisited } = usePokemon();
+  const { getCurrentPokemon, getLastVisitedPage } = usePokemon();
   let history = useHistory();
   const [pokemonReleased, setPokemonReleased] = useState(false);
 
   const handleConfirmRelease = () => {
-    if (getLastPageVisited().onMyPokemonList) {
+    if (getLastVisitedPage().onMyPokemonList) {
       releasePokemon(getCurrentPokemon());
     }
     setPokemonReleased(true);

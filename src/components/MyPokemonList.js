@@ -4,11 +4,17 @@ import styled from "@emotion/styled";
 import CardList from "./CardList";
 import Card from "./Card";
 import NavButton from "./NavButton";
+import { Text } from "./Utilities";
 
 import useUser from "../hooks/useUser";
 
 const Wrapper = styled.div`
   padding-bottom: 60px;
+  text-align: center;
+`;
+
+const NoPokemon = styled(Text)`
+  margin-top: 20px;
 `;
 
 const MyPokemonList = () => {
@@ -26,6 +32,11 @@ const MyPokemonList = () => {
 
   return (
     <Wrapper>
+      {userPokemon.length === 0 ? (
+        <NoPokemon Bold TextDark>
+          You have not captured any pokemon
+        </NoPokemon>
+      ) : null}
       <CardList>
         {userPokemon.slice(start, end).map((pokemon, index) => (
           <Card

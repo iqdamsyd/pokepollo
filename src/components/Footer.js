@@ -38,7 +38,6 @@ const Footer = () => {
   const handleClickPokeDex = () => {
     setActive({ pokedex: true, mypokemon: false });
     rememberLastPageVisited(false);
-    console.log(getLastVisitedPage());
     history.push("/");
   };
 
