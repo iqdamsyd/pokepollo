@@ -4,15 +4,13 @@ import { GET_POKE } from "../graphql/Queries";
 import styled from "@emotion/styled";
 import { Text, Wrapper } from "./Utilities";
 import CardDetail from "./CardDetail";
-// import { ModalSuccess, ModalFailed, ModalLoading } from "./Modals";
 import { Loading, ErrorMessage } from "./Utilities";
-// import useUser from "../hooks/useUser";
 import usePokemon from "../hooks/usePokemon";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #8ebc8d;
+  background-color: #b3a125;
 `;
 
 const TextWrapper = styled(Wrapper)`
@@ -42,7 +40,6 @@ const PokemonDetail = () => {
   const pokeName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
   const pokeNumber = `#${(pokemon.id < 10 ? "0" : "") + pokemon.id.toString()}`;
 
-  // console.log("onMyPokemonList from PokemonDetail", onMyPokemonList);
   return (
     <Container>
       <TextWrapper>

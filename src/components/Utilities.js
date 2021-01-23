@@ -96,4 +96,62 @@ const Alert = styled.span`
   }};
 `;
 
-export { Text, Button, Wrapper, ErrorMessage, Loading, Input, Form, Alert };
+const Badge = styled.span`
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "water":
+        return "#6390F0";
+      case "fire":
+        return "#EE8130";
+      case "electric":
+        return "#F7D02C";
+      case "grass":
+        return "#7AC74C";
+      case "ice":
+        return "#96D9D6";
+      case "fighting":
+        return "#C22E28";
+      case "poison":
+        return "#A33EA1";
+      case "ground":
+        return "#E2BF65";
+      case "flying":
+        return "#A98FF3";
+      case "psychic":
+        return "lavender";
+      case "bug":
+        return "#06600A";
+      case "rock":
+        return "#A6A29A";
+      case "ghost":
+        return "#735797";
+      case "dragon":
+        return "#6F35FC";
+      case "dark":
+        return "#705746";
+      case "steel":
+        return "#B7B7CE";
+      case "fairy":
+        return "#D685AD";
+      default:
+        return "#A8A77A";
+    }
+  }};
+  color: white;
+  padding: 2.5px 10px;
+  padding-bottom: 6px;
+  border: 0px;
+  border-radius: 20px;
+`;
+
+export {
+  Text,
+  Button,
+  Wrapper,
+  ErrorMessage,
+  Loading,
+  Input,
+  Form,
+  Alert,
+  Badge,
+};

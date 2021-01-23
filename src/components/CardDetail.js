@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Text, Button as ButtonBase, Wrapper } from "./Utilities";
+import { Text, Button as ButtonBase, Wrapper, Badge } from "./Utilities";
 import NavButton from "./NavButton";
 import { ModalCatching, ModalRelease } from "./Modals";
 
@@ -40,15 +40,7 @@ const MoveListWrapper = styled(Wrapper)`
   justify-content: space-between;
   margin: 10px 0px;
   gap: 10px;
-`;
-
-const Badge = styled.span`
-  background-color: green;
-  color: white;
-  padding: 2.5px 10px;
-  padding-bottom: 6px;
-  border: 0px;
-  border-radius: 20px;
+  text-align: center;
 `;
 
 const Button = styled(ButtonBase)`
@@ -98,7 +90,9 @@ const CardDetail = ({ pokemon }) => {
       <CardDetailWrapper>
         <BadgeWrapper>
           {pokemon.types.map((t) => (
-            <Badge key={t.type.name}>{t.type.name}</Badge>
+            <Badge key={t.type.name} type={t.type.name}>
+              {t.type.name}
+            </Badge>
           ))}
         </BadgeWrapper>
         <MoveWrapper>
