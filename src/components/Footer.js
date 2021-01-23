@@ -35,8 +35,6 @@ const Footer = () => {
     mypokemon: window.location.pathname === "/mypokemon" ? true : false,
   });
 
-  console.log(window.location.pathname);
-
   const handleClickPokeDex = () => {
     setActive({ pokedex: true, mypokemon: false });
     rememberOnMyPokemonList(false);

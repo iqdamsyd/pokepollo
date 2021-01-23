@@ -34,6 +34,10 @@ const Button = styled(ButtonBase)`
   margin-top: 20px;
 `;
 
+const reloadOnMyPokemonList = () => {
+  return window.location.pathname === "/mypokemon";
+};
+
 const Card = ({ first, pokemon }) => {
   const { getAllPokemonCapturedByUser } = useUser();
   const { changeCurrentPokemon, isOnMyPokemonList } = usePokemon();
@@ -70,7 +74,7 @@ const Card = ({ first, pokemon }) => {
         {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
       </Text>
       <Text Italic TextDark>
-        {isOnMyPokemonList()
+        {isOnMyPokemonList() || reloadOnMyPokemonList()
           ? capitalizeNickname(pokemon.nickname)
           : isCaptured()
           ? "Captured"
