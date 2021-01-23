@@ -110,7 +110,7 @@ const ModalCatchingSuccess = ({
       image: getCurrentPokemon().image,
     };
     const pokeWithSameNickname = getAllPokemonCapturedByUser().filter(
-      (poke) => poke.nickname === newPoke.nickname
+      (poke) => poke.nickname.toLowerCase() === newPoke.nickname.toLowerCase()
     );
     if (pokeWithSameNickname.length) {
       setErrorMessage("Nickname already exists.");
