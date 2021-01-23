@@ -28,22 +28,24 @@ const Button = styled(ButtonBase)`
 `;
 
 const Footer = () => {
-  const { rememberLastPageVisited, getLastVisitedPage } = usePokemon();
+  const { rememberOnMyPokemonList } = usePokemon();
   let history = useHistory();
   const [active, setActive] = useState({
-    pokedex: !getLastVisitedPage().onMyPokemonList,
-    mypokemon: getLastVisitedPage().onMyPokemonList,
+    pokedex: window.location.pathname === "/" ? true : false,
+    mypokemon: window.location.pathname === "/mypokemon" ? true : false,
   });
+
+  console.log(window.location.pathname);
 
   const handleClickPokeDex = () => {
     setActive({ pokedex: true, mypokemon: false });
-    rememberLastPageVisited(false);
+    rememberOnMyPokemonList(false);
     history.push("/");
   };
 
   const handleClickMyPokemon = () => {
     setActive({ mypokemon: true, pokedex: false });
-    rememberLastPageVisited(true);
+    rememberOnMyPokemonList(true);
     history.push("/mypokemon");
   };
 

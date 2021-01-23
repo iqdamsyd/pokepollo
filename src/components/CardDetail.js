@@ -52,7 +52,7 @@ const Button = styled(ButtonBase)`
 
 const CardDetail = ({ pokemon }) => {
   const [prob, setProb] = useState();
-  const { getCurrentPokemon, getLastVisitedPage } = usePokemon();
+  const { getCurrentPokemon, isOnMyPokemonList } = usePokemon();
   const [{ start, end }, setSlice] = useState({ start: 0, end: 6 });
   const [showModalCatching, setShowModalCatching] = useState(false);
   const [showModalRelease, setShowModalRelease] = useState(false);
@@ -71,7 +71,7 @@ const CardDetail = ({ pokemon }) => {
   };
 
   let button;
-  if (getLastVisitedPage().onMyPokemonList) {
+  if (isOnMyPokemonList()) {
     button = (
       <Button Primary onClick={handleRelease}>
         Release

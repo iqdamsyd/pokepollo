@@ -6,8 +6,10 @@ export const PokemonProvider = ({ children }) => {
   const [currentPokemon, setCurrentPokemon] = useState(null);
   const [onMyPokemonList, setOnMyPokemonList] = useState(false);
   const currentPokemonRef = useRef();
+  const onMyPokemonListRef = useRef();
 
   currentPokemonRef.current = currentPokemon;
+  onMyPokemonListRef.current = onMyPokemonList;
 
   const changeCurrentPokemon = (pokemon) => {
     setCurrentPokemon(pokemon);
@@ -17,19 +19,20 @@ export const PokemonProvider = ({ children }) => {
     return currentPokemonRef.current;
   };
 
-  const rememberLastPageVisited = (boolean) => {
+  const rememberOnMyPokemonList = (boolean) => {
     setOnMyPokemonList(boolean);
-    localStorage.setItem(
-      "rememberLastVisit",
-      JSON.stringify({ onMyPokemonList: boolean })
-    );
+    // localStorage.setItem(
+    //   "rememberLastVisit",
+    //   JSON.stringify({ onMyPokemonList: boolean })
+    // );
   };
 
-  const getLastVisitedPage = () => {
-    if (!localStorage.getItem("rememberLastVisit")) {
-      return { onMyPokemonList: false };
-    }
-    return JSON.parse(localStorage.getItem("rememberLastVisit"));
+  const isOnMyPokemonList = () => {
+    // if (!localStorage.getItem("rememberLastVisit")) {
+    //   return { onMyPokemonList: false };
+    // }
+    // return JSON.parse(localStorage.getItem("rememberLastVisit"));
+    return onMyPokemonListRef.current;
   };
 
   return (
@@ -38,8 +41,8 @@ export const PokemonProvider = ({ children }) => {
         onMyPokemonList,
         getCurrentPokemon,
         changeCurrentPokemon,
-        getLastVisitedPage,
-        rememberLastPageVisited,
+        isOnMyPokemonList,
+        rememberOnMyPokemonList,
       }}
     >
       {children}

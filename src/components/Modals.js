@@ -228,12 +228,12 @@ const ModalCatching = ({ prob, pokemon }) => {
 
 const ModalRelease = ({ showModalRelease, setShowModalRelease }) => {
   const { releasePokemon } = useUser();
-  const { getCurrentPokemon, getLastVisitedPage } = usePokemon();
+  const { getCurrentPokemon, isOnMyPokemonList } = usePokemon();
   let history = useHistory();
   const [pokemonReleased, setPokemonReleased] = useState(false);
 
   const handleConfirmRelease = () => {
-    if (getLastVisitedPage().onMyPokemonList) {
+    if (isOnMyPokemonList()) {
       releasePokemon(getCurrentPokemon());
     }
     setPokemonReleased(true);

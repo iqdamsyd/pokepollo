@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import usePokemon from "../hooks/usePokemon";
 import useUser from "../hooks/useUser";
 import { Wrapper } from "./Utilities";
@@ -25,15 +26,21 @@ const OwnedPokemon = styled.span`
   font-size: 1em;
 `;
 
+const setBrandText = () => {
+  switch (window.location.pathname) {
+    case "/mypokemon":
+      return "My Pokemon";
+    default:
+      return "PokeDex";
+  }
+};
+
 const Header = () => {
   const { getTotalPokemonOwnedByUser } = useUser();
-  const { getLastVisitedPage } = usePokemon();
-
-  const brand = getLastVisitedPage().onMyPokemonList ? "My Pokemon" : "PokeDex";
 
   return (
     <HeaderWrapper>
-      <Brand>{brand}</Brand>
+      <Brand>{setBrandText()}</Brand>
       <OwnedPokemon>Owned: {getTotalPokemonOwnedByUser()}</OwnedPokemon>
     </HeaderWrapper>
   );

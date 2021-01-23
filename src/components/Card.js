@@ -36,7 +36,7 @@ const Button = styled(ButtonBase)`
 
 const Card = ({ first, pokemon }) => {
   const { getAllPokemonCapturedByUser } = useUser();
-  const { changeCurrentPokemon, getLastVisitedPage } = usePokemon();
+  const { changeCurrentPokemon, isOnMyPokemonList } = usePokemon();
 
   let history = useHistory();
 
@@ -70,7 +70,7 @@ const Card = ({ first, pokemon }) => {
         {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
       </Text>
       <Text Italic TextDark>
-        {getLastVisitedPage().onMyPokemonList
+        {isOnMyPokemonList()
           ? capitalizeNickname(pokemon.nickname)
           : isCaptured()
           ? "Captured"
