@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
-import usePokemon from "../hooks/usePokemon";
 import useUser from "../hooks/useUser";
 import { Wrapper } from "./Utilities";
 
