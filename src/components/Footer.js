@@ -22,6 +22,9 @@ const Button = styled(ButtonBase)`
   border-radius: ${(props) => (props.active ? "0px" : "10px")};
   font-size: 1em;
   font-weight: 700;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Footer = () => {

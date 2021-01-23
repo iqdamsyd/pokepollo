@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import usePokemon from "../hooks/usePokemon";
 import useUser from "../hooks/useUser";
 import { Wrapper } from "./Utilities";
 
@@ -26,9 +27,13 @@ const OwnedPokemon = styled.span`
 
 const Header = () => {
   const { getTotalPokemonOwnedByUser } = useUser();
+  const { getLastVisitedPage } = usePokemon();
+
+  const brand = getLastVisitedPage().onMyPokemonList ? "My Pokemon" : "PokeDex";
+
   return (
     <HeaderWrapper>
-      <Brand>PokeDex</Brand>
+      <Brand>{brand}</Brand>
       <OwnedPokemon>Owned: {getTotalPokemonOwnedByUser()}</OwnedPokemon>
     </HeaderWrapper>
   );
