@@ -90,7 +90,11 @@ const Card = ({ first, pokemon, handleShowDetail }) => {
           ? "Captured"
           : "Uncaptured"}
       </Text>
-      <Button Primary onClick={handleClickDetail}>
+      <Button
+        Primary
+        onClick={handleClickDetail}
+        data-testid={`button-detail-${pokemon.id}`}
+      >
         Details
       </Button>
     </CardWrapper>
