@@ -50,9 +50,9 @@ const Button = styled(ButtonBase)`
   font-weight: 900;
 `;
 
-const CardDetail = ({ pokemon }) => {
+const CardDetail = ({ pokemon, handleCloseDetail }) => {
   const [prob, setProb] = useState();
-  const { getCurrentPokemon, isOnMyPokemonList } = usePokemon();
+  const { isOnMyPokemonList } = usePokemon();
   const [{ start, end }, setSlice] = useState({ start: 0, end: 6 });
   const [showModalCatching, setShowModalCatching] = useState(false);
   const [showModalRelease, setShowModalRelease] = useState(false);
@@ -60,26 +60,24 @@ const CardDetail = ({ pokemon }) => {
   const pokeMovesLength = pokemon.moves.length;
 
   const handleCatch = () => {
-    console.log("Catch", pokemon);
     setProb(Math.random());
     setShowModalCatching(true);
   };
 
   const handleRelease = () => {
-    console.log("Release", getCurrentPokemon());
     setShowModalRelease(true);
   };
 
   let button;
   if (isOnMyPokemonList()) {
     button = (
-      <Button Primary onClick={handleRelease}>
+      <Button Primary onClick={handleRelease} data-testid="button-catch">
         Release
       </Button>
     );
   } else {
     button = (
-      <Button Primary onClick={handleCatch}>
+      <Button Primary onClick={handleCatch} data-testid="button-release">
         Catch!
       </Button>
     );
@@ -123,6 +121,7 @@ const CardDetail = ({ pokemon }) => {
         <ModalRelease
           showModalRelease={showModalRelease}
           setShowModalRelease={setShowModalRelease}
+          handleCloseDetail={handleCloseDetail}
         />
       ) : null}
     </>

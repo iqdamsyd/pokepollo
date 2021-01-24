@@ -2,9 +2,18 @@ import { createContext, useState, useRef } from "react";
 
 const PokemonContext = createContext();
 
+const refreshOnMyPokemonList = () => {
+  if (window.location.pathname === "/mypokemon") {
+    return true;
+  }
+  return false;
+};
+
 export const PokemonProvider = ({ children }) => {
   const [currentPokemon, setCurrentPokemon] = useState(null);
-  const [onMyPokemonList, setOnMyPokemonList] = useState(false);
+  const [onMyPokemonList, setOnMyPokemonList] = useState(
+    refreshOnMyPokemonList
+  );
   const currentPokemonRef = useRef();
   const onMyPokemonListRef = useRef();
 
@@ -13,6 +22,7 @@ export const PokemonProvider = ({ children }) => {
 
   const changeCurrentPokemon = (pokemon) => {
     setCurrentPokemon(pokemon);
+    // currentPokemonRef.current = currentPokemon;
   };
 
   const getCurrentPokemon = () => {

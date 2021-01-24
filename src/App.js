@@ -8,10 +8,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import PokemonList from "./components/PokemonList";
-import PokemonDetail from "./components/PokemonDetail";
 import MyPokemonList from "./components/MyPokemonList";
 import { UserProvider } from "./hooks/UserContext";
 import { PokemonProvider } from "./hooks/PokemonContext";
@@ -52,16 +49,7 @@ function App() {
                   path="/"
                   render={(props) => (
                     <>
-                      <Header />
                       <PokemonList offset={offset} setOffset={setOffset} />
-                    </>
-                  )}
-                />
-                <Route
-                  path="/pokemon"
-                  render={(props) => (
-                    <>
-                      <PokemonDetail />
                     </>
                   )}
                 />
@@ -69,13 +57,11 @@ function App() {
                   path="/mypokemon"
                   render={(props) => (
                     <>
-                      <Header />
                       <MyPokemonList />
                     </>
                   )}
                 />
               </Switch>
-              <Footer />
             </div>
           </PokemonProvider>
         </UserProvider>

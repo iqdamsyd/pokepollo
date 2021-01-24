@@ -27,7 +27,7 @@ const Avatar = styled.img`
   z-index: 2;
 `;
 
-const PokemonDetail = () => {
+const PokemonDetail = ({ handleCloseDetail }) => {
   const { getCurrentPokemon } = usePokemon();
   const { error, loading, data } = useQuery(GET_POKE, {
     variables: { name: getCurrentPokemon().name },
@@ -51,7 +51,7 @@ const PokemonDetail = () => {
         </Text>
       </TextWrapper>
       <Avatar src={getCurrentPokemon().image} alt={getCurrentPokemon().name} />
-      <CardDetail pokemon={pokemon} />
+      <CardDetail pokemon={pokemon} handleCloseDetail={handleCloseDetail} />
     </Container>
   );
 };

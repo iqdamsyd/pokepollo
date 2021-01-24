@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import {
   Text,
@@ -103,7 +102,6 @@ const ModalCatchingSuccess = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(nickname);
     const newPoke = {
       ...pokemon,
       nickname: nickname,
@@ -189,13 +187,10 @@ const ModalCatching = ({ prob, pokemon }) => {
     setShowModalLoading(true);
     setTimeout(() => {
       setShowModalLoading(false);
-      console.log("Prob:", prob);
       if (prob < 0.5) {
         setShowModalCatchingSuccess(true);
-        console.log("Success");
       } else {
         setShowModalCatchingFailed(true);
-        console.log("Failed");
       }
     }, 1500);
   }, [prob]);
@@ -226,10 +221,13 @@ const ModalCatching = ({ prob, pokemon }) => {
   );
 };
 
-const ModalRelease = ({ showModalRelease, setShowModalRelease }) => {
+const ModalRelease = ({
+  showModalRelease,
+  setShowModalRelease,
+  handleCloseDetail,
+}) => {
   const { releasePokemon } = useUser();
   const { getCurrentPokemon, isOnMyPokemonList } = usePokemon();
-  let history = useHistory();
   const [pokemonReleased, setPokemonReleased] = useState(false);
 
   const handleConfirmRelease = () => {
@@ -244,8 +242,8 @@ const ModalRelease = ({ showModalRelease, setShowModalRelease }) => {
   };
 
   const handleClose = () => {
+    handleCloseDetail();
     setShowModalRelease(false);
-    history.push("/mypokemon");
   };
 
   return (

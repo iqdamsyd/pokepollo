@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Button as ButtonBase, Text as TextBase, Wrapper } from "./Utilities";
 import usePokemon from "../hooks/usePokemon";
@@ -38,11 +37,9 @@ const reloadOnMyPokemonList = () => {
   return window.location.pathname === "/mypokemon";
 };
 
-const Card = ({ first, pokemon }) => {
+const Card = ({ first, pokemon, handleShowDetail }) => {
   const { getAllPokemonCapturedByUser } = useUser();
   const { changeCurrentPokemon, isOnMyPokemonList } = usePokemon();
-
-  let history = useHistory();
 
   const isCaptured = () => {
     return getAllPokemonCapturedByUser().some(
@@ -61,7 +58,7 @@ const Card = ({ first, pokemon }) => {
 
   const handleClickDetail = () => {
     changeCurrentPokemon(pokemon);
-    history.push("/pokemon");
+    handleShowDetail();
   };
 
   return (

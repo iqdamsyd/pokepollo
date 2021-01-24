@@ -27,7 +27,7 @@ const Button = styled(ButtonBase)`
   }
 `;
 
-const Footer = () => {
+const Footer = ({ handleCloseDetail }) => {
   const { rememberOnMyPokemonList } = usePokemon();
   let history = useHistory();
   const [active, setActive] = useState({
@@ -36,12 +36,14 @@ const Footer = () => {
   });
 
   const handleClickPokeDex = () => {
+    handleCloseDetail();
     setActive({ pokedex: true, mypokemon: false });
     rememberOnMyPokemonList(false);
     history.push("/");
   };
 
   const handleClickMyPokemon = () => {
+    handleCloseDetail();
     setActive({ mypokemon: true, pokedex: false });
     rememberOnMyPokemonList(true);
     history.push("/mypokemon");
@@ -49,10 +51,18 @@ const Footer = () => {
 
   return (
     <Container>
-      <Button active={active.pokedex} onClick={handleClickPokeDex}>
+      <Button
+        active={active.pokedex}
+        onClick={handleClickPokeDex}
+        data-testid="pokedex-button"
+      >
         PokeDex
       </Button>
-      <Button active={active.mypokemon} onClick={handleClickMyPokemon}>
+      <Button
+        active={active.mypokemon}
+        onClick={handleClickMyPokemon}
+        data-testid="mypokemon-button"
+      >
         My Pokemon
       </Button>
     </Container>
