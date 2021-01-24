@@ -17,6 +17,19 @@ const CardWrapper = styled(Wrapper)`
   @media (min-width: 992px) {
     position: inherit;
   }
+
+  animation-name: scaling;
+  animation-duration: 0.3s;
+
+  @keyframes scaling {
+    from {
+      transform: scale(0);
+      transition: all 0.3s 0.3s cubic-bezier(0.5, 0, 0.5, 1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
 `;
 
 const Avatar = styled.img`

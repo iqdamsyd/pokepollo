@@ -19,7 +19,7 @@ const Button = styled(ButtonBase)`
   padding: 10px;
   background-color: ${(props) => (props.active ? "#E14B4B" : "white")};
   color: ${(props) => (props.active ? "white" : "#333")};
-  border-radius: ${(props) => (props.active ? "0px" : "10px")};
+  border-radius: 0px;
   font-size: 1em;
   font-weight: 700;
   &:hover {

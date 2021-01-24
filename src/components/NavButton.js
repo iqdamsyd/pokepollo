@@ -19,6 +19,18 @@ const Button = styled(ButtonBase)`
   padding: 0px;
   padding-bottom: 4px;
   font-weight: 600;
+  animation-name: slideup;
+  animation-duration: 0.4s;
+
+  @keyframes slideup {
+    from {
+      transform: translateY(100%);
+      transition: all 0.3s 0.3s ease-in-out;
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
 `;
 
 const NavButton = ({

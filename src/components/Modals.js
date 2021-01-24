@@ -32,6 +32,19 @@ const ModalWrapper = styled(Wrapper)`
   padding: 40px;
   border-radius: 4px;
   margin: 0px 20px;
+
+  animation-name: scaling;
+  animation-duration: 0.3s;
+
+  @keyframes scaling {
+    from {
+      transform: scale(0);
+      transition: all 0.3s 0.3s cubic-bezier(0.5, 0, 0.5, 1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
 `;
 
 const ButtonWrapper = styled(Wrapper)`
@@ -51,10 +64,16 @@ const ModalLoading = ({ showModalLoading }) => {
   return (
     <>
       {showModalLoading ? (
-        <Background>
-          <ModalWrapper>
-            <Text TextDark LargeText Bold Italic>
-              Loading...
+        <Background hidden={showModalLoading}>
+          <ModalWrapper style={{ paddingTop: "60px", paddingBottom: "60px" }}>
+            <Text
+              style={{ textAlign: "center" }}
+              TextDark
+              LargeText
+              Bold
+              Italic
+            >
+              Catching Pokemon...
             </Text>
           </ModalWrapper>
         </Background>
@@ -74,8 +93,11 @@ const ModalCatchingFailed = ({
           <Text LargeText Bold Italic TextDark>
             Failed!
           </Text>
-          <Text TextDark>The pokemon has run away.</Text>
-          <Text TextDark>Try again next time.</Text>
+          <Text TextDark style={{ textAlign: "center" }}>
+            The pokemon has run away.
+            <br />
+            Maybe try again next time.
+          </Text>
           <Button Primary onClick={() => setShowModalCatchingFailed(false)}>
             Close
           </Button>
@@ -115,7 +137,7 @@ const ModalCatchingSuccess = ({
       setSuccessMessage("");
     } else {
       addPokemon(newPoke);
-      setSuccessMessage("Saved! Thats a nice nickname.");
+      setSuccessMessage("That's a good nickname.");
       setErrorMessage("");
     }
   };
@@ -125,27 +147,19 @@ const ModalCatchingSuccess = ({
       <Background>
         <ModalWrapper>
           {successMessage ? (
-            <>
-              <Text LargeText Bold Italic TextDark>
-                Saved
-              </Text>
-              <Text TextDark>{successMessage}</Text>
-              <Button
-                Primary
-                onClick={() => setShowModalCatchingSuccess(false)}
-              >
-                Ok
-              </Button>
-            </>
+            <ModalSaved
+              successMessage={successMessage}
+              setShowModalCatchingSuccess={setShowModalCatchingSuccess}
+            />
           ) : (
             <>
               <Text LargeText Bold Italic TextDark>
                 Success!
               </Text>
-              <Text TextDark>
+              <Text TextDark style={{ textAlign: "center" }}>
                 You have successfully captured the pokemon.
                 <br />
-                Give it a nickname, and make sure it is unique!
+                Give it a nickname, and make sure it is <strong>unique!</strong>
               </Text>
               <Form onSubmit={handleSubmit}>
                 {errorMessage ? (
@@ -252,15 +266,7 @@ const ModalRelease = ({
         <Background>
           <ModalWrapper>
             {pokemonReleased ? (
-              <>
-                <Text LargeText Bold Italic TextDark>
-                  Released
-                </Text>
-                <Text TextDark> Pokemon has been released.</Text>
-                <Button Primary onClick={handleClose}>
-                  Ok
-                </Button>
-              </>
+              <ModalReleased handleClose={handleClose} />
             ) : (
               <>
                 <Text LargeText Bold Italic TextDark>
@@ -281,6 +287,42 @@ const ModalRelease = ({
         </Background>
       ) : null}
     </>
+  );
+};
+
+const ModalReleased = ({ handleClose }) => {
+  return (
+    <Background style={{ background: "rgba(0,0,0,0.3)" }}>
+      <ModalWrapper>
+        <Text LargeText Bold Italic TextDark>
+          Released
+        </Text>
+        <Text TextDark> Pokemon has been released.</Text>
+        <Button Primary onClick={handleClose}>
+          Ok
+        </Button>
+      </ModalWrapper>
+    </Background>
+  );
+};
+
+const ModalSaved = ({ successMessage, setShowModalCatchingSuccess }) => {
+  return (
+    <Background style={{ background: "rgba(0,0,0,0.3)" }}>
+      <ModalWrapper>
+        <Text LargeText Bold Italic TextDark>
+          Saved
+        </Text>
+        <Text TextDark style={{ textAlign: "center" }}>
+          {successMessage}
+          <br />
+          This Pokemon has been added to your pokemon list.
+        </Text>
+        <Button Primary onClick={() => setShowModalCatchingSuccess(false)}>
+          Ok
+        </Button>
+      </ModalWrapper>
+    </Background>
   );
 };
 

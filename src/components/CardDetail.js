@@ -16,6 +16,18 @@ const CardDetailWrapper = styled(Wrapper)`
   border-top-left-radius: 80px;
   border-top-right-radius: 80px;
   box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.3);
+  animation-name: slideup;
+  animation-duration: 0.4s;
+
+  @keyframes slideup {
+    from {
+      transform: translateY(100%);
+      transition: all 0.3s 0.3s ease-in-out;
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
 `;
 
 const BadgeWrapper = styled(Wrapper)`

@@ -11,6 +11,19 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #8ebc8d;
+
+  animation-name: slidedown;
+  animation-duration: 0.3s;
+
+  @keyframes slidedown {
+    from {
+      transform: translateY(-100%);
+      transition: all 0.3s 0.3s ease-in-out;
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
 `;
 
 const TextWrapper = styled(Wrapper)`
