@@ -42,7 +42,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.main,
       outline: "none",
       border: "0",
-      width: (props) => `${props.inputLength * 9}px`,
+      width: (props) =>
+        props.inputLength > 10
+          ? `${props.inputLength + 1}ch`
+          : `${props.inputLength + 2}ch`,
     },
     "& svg": {
       color: theme.palette.secondary.main,
