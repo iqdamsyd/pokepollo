@@ -1,72 +1,46 @@
-import { useState } from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  HttpLink,
-  from,
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PokemonList from "./components/PokemonList";
-import MyPokemonList from "./components/MyPokemonList";
-import { UserProvider } from "./hooks/UserContext";
-import { PokemonProvider } from "./hooks/PokemonContext";
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
+// REFACTORING
+import Layout, { LandingLayout, MainLayout } from "./components/layout";
+import Landing from "./components/views/Landing";
+import Pokedex from "./components/views/Pokedex";
+import Home from "./components/views/Home";
+import PokemonDetail from "./components/views/PokemonDetail";
+import Settings from "./components/views/Settings";
+import { ProvidePokeball } from "./hooks/usePokeball";
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-
-const link = from([
-  errorLink,
-  new HttpLink({ uri: "https://graphql-pokeapi.vercel.app/api/graphql" }),
-]);
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(), // setup cache
-  link: link,
-});
+// TODO:
+// Transition
 
 function App() {
-  const [offset, setOffset] = useState(0);
-
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <UserProvider>
-          <PokemonProvider>
-            <div className="App">
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={(props) => (
-                    <>
-                      <PokemonList offset={offset} setOffset={setOffset} />
-                    </>
-                  )}
-                />
-                <Route
-                  path="/mypokemon"
-                  render={(props) => (
-                    <>
-                      <MyPokemonList />
-                    </>
-                  )}
-                />
-              </Switch>
-            </div>
-          </PokemonProvider>
-        </UserProvider>
-      </Router>
-    </ApolloProvider>
+    <Router>
+      <Switch>
+        <Route path={["/"]} exact>
+          <Layout layout={LandingLayout}>
+            <Route path={"/"} exact component={() => <Landing />} />
+          </Layout>
+        </Route>
+        <ProvidePokeball>
+          <Route
+            path={["/pokedex", "/mypokemon", "/pokemon", "/settings"]}
+            exact
+          >
+            <Layout layout={MainLayout}>
+              <Route path={"/pokedex"} exact component={() => <Pokedex />} />
+              <Route path={"/mypokemon"} exact component={() => <Home />} />
+              <Route
+                path={"/pokemon"}
+                exact
+                component={() => <PokemonDetail />}
+              />
+              <Route path={"/settings"} exact component={() => <Settings />} />
+            </Layout>
+          </Route>
+        </ProvidePokeball>
+      </Switch>
+    </Router>
   );
 }
 

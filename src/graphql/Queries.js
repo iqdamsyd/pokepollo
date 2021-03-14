@@ -3,14 +3,8 @@ import { gql } from "@apollo/client";
 export const GET_POKEMONS = gql`
   query pokemons($limit: Int, $offset: Int) {
     pokemons(limit: $limit, offset: $offset) {
-      count
-      next
-      previous
-      status
-      message
       results {
         id
-        url
         name
         image
       }
@@ -18,21 +12,26 @@ export const GET_POKEMONS = gql`
   }
 `;
 
-export const GET_POKE = gql`
+export const GET_POKEMON_DETAILS = gql`
   query pokemon($name: String!) {
     pokemon(name: $name) {
       id
       name
-      moves {
-        move {
-          name
-        }
-      }
       types {
         type {
           name
         }
       }
+      weight
+      height
+      stats {
+        base_stat
+      }
+      sprites {
+        front_default
+        back_default
+      }
+      status
     }
   }
 `;
